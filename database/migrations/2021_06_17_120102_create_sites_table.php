@@ -20,7 +20,7 @@ class CreateSitesTable extends Migration
             $table->string('location');
             $table->foreignId('contact_person_id')->constrained('contact_people')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
-            $table->json('photo_upload_option');
+            $table->json('photo_upload');
             $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Site;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateSiteRequest;
+use App\Http\Requests\UpdateSiteRequest;
 
 class SiteController extends Controller
 {
@@ -14,18 +16,26 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        //fetch all sites
+        return response()->json([
+            'site' => Site::get(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CreateSiteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSiteRequest $request)
     {
-        //
+        //validate request data and save to db
+        $site = Site::create($request->validated());
+        return response()->json([
+            'message' => 'Site Created',
+            'Site' => $site
+        ]);
     }
 
     /**
@@ -34,9 +44,11 @@ class SiteController extends Controller
      * @param  \App\Models\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function show(Site $site)
+    public function getSite(Request $id)
     {
-        //
+        //find site from DB and return
+        $site = Site::findOrFail($id);
+        return response()->json(['site' => $site]);
     }
 
     /**
@@ -46,9 +58,17 @@ class SiteController extends Controller
      * @param  \App\Models\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Site $site)
+    public function update(CreateSiteRequest $request, $id)
     {
-        //
+        //check if model exists in db
+        $site = Site::findOrFail($id);
+
+        //update the validated request to model
+        $site->update($request->validated());
+        return response()->json([
+            'message' => 'Site Updated',
+            'Site' => $site
+        ]);
     }
 
     /**
@@ -57,8 +77,13 @@ class SiteController extends Controller
      * @param  \App\Models\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Site $site)
+    public function destroy($id)
     {
         //
+        $site = Site::findOrFail($id);
+        $site->delete();
+        return response()->json([
+            'success' => 'Site Deleted',
+        ]);
     }
 }
