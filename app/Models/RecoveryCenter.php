@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class RecoveryCenter extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'contact_person',
+        'status'
+    ];
 }
