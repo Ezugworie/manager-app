@@ -15,6 +15,7 @@ class Site extends Model
         'location',
         'contact_person_id',
         'status',
-        'photo_upload_option'
+        'photo_upload',
+        'created_by'
     ];
 }

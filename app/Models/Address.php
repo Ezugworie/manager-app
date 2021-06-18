@@ -12,6 +12,10 @@ class Address extends Model
     protected $fillable = [
         'line_1',
         'town',
-        'postcode'
+        'postcode',
+        'longitude',
+        'latitude',
+        'created_by'
+
     ];
 }

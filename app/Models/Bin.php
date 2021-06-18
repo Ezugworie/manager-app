@@ -14,5 +14,7 @@ class Bin extends Model
         'quantity',
         'size_id',
         'type_id',
+        'created_by'
+
     ];
 }

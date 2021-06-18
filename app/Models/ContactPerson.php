@@ -14,6 +14,8 @@ class ContactPerson extends Model
         'email',
         'phone',
         'alternate_email',
-        'alternate_phone'
+        'alternate_phone',
+        'created_by'
+
     ];
 }

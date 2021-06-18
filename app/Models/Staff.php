@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Address;
 
 class Staff extends Model
 {
@@ -14,6 +15,17 @@ class Staff extends Model
         'contact_person',
         'email',
         'phone',
-        'address_id'
+        'address_id',
+        'created_by'
+
     ];
+
+
+    /**
+     * Get the address associated with the staff.
+     */
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }
