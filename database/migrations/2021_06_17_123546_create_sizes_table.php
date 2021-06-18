@@ -16,6 +16,7 @@ class CreateSizesTable extends Migration
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
             $table->integer('number');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

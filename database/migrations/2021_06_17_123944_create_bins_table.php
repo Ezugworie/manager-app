@@ -17,8 +17,9 @@ class CreateBinsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('quantity');
-            $table->unsignedBigInteger('size_id');
-            $table->unsignedBigInteger('type_id');
+            $table->foreignId('size_id')->constrained('sizes');
+            $table->foreignId('type_id')->constrained('types');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

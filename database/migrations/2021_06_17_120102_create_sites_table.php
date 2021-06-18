@@ -18,9 +18,10 @@ class CreateSitesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('location');
-            $table->unsignedBigInteger('contact_person_id');
+            $table->foreignId('contact_person_id')->constrained('contact_people')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
-            $table->boolean('photo_upload_option');
+            $table->json('photo_upload_option');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

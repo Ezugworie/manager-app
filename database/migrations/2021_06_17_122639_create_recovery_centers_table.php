@@ -18,8 +18,9 @@ class CreateRecoveryCentersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('contact_person');
+            $table->string('contact_person')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateAddressesTable extends Migration
             $table->text('line_1');
             $table->text('town');
             $table->string('postcode');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

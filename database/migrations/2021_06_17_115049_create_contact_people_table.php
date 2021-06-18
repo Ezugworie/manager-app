@@ -20,6 +20,7 @@ class CreateContactPeopleTable extends Migration
             $table->string('phone');
             $table->string('alternate_email');
             $table->string('alternate_phone');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }
