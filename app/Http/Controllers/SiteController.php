@@ -44,7 +44,7 @@ class SiteController extends Controller
      * @param  \App\Models\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function getSite(Request $id)
+    public function getSite($id)
     {
         //find site from DB and return
         $site = Site::findOrFail($id);

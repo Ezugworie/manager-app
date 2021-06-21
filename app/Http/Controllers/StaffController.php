@@ -43,7 +43,7 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getStaff(Request $id)
+    public function getStaff($id)
     {
         //find staff from DB and return
         $staff = Staff::findOrFail($id);

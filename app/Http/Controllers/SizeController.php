@@ -43,9 +43,8 @@ class SizeController extends Controller
      * @param  \App\Models\Size  $size
      * @return \Illuminate\Http\Response
      */
-    public function getSize(Request $id)
+    public function getSize($id)
     {
-
         //find size from DB and return
         $size = Size::findOrFail($id);
         return response()->json(['size' => $size]);

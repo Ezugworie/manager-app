@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RecoveryCenter;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateRecoveryCenterRequest;
 
 class RecoveryCenterController extends Controller
 {
@@ -14,18 +15,27 @@ class RecoveryCenterController extends Controller
      */
     public function index()
     {
-        //
+        //fetch all bins
+        return response()->json([
+            'recoveryCenter' => RecoveryCenter::get(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateRecoveryCenterRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRecoveryCenterRequest $request)
     {
-        //
+        //validate request data and save to db
+        $recoveryCenter = RecoveryCenter::create($request->validated());
+        return response()->json([
+            'message' => 'Recovery Center Created',
+            'RecoveryCenter' => $recoveryCenter
+
+        ]);
     }
 
     /**
@@ -34,9 +44,11 @@ class RecoveryCenterController extends Controller
      * @param  \App\Models\RecoveryCenter  $recoveryCenter
      * @return \Illuminate\Http\Response
      */
-    public function show(RecoveryCenter $recoveryCenter)
+    public function getRecoveryCenter($id)
     {
-        //
+        //find recovery center from DB and return
+        $recoveryCenter = RecoveryCenter::findOrFail($id);
+        return response()->json(['recoveryCenter' => $recoveryCenter]);
     }
 
     /**
@@ -46,9 +58,16 @@ class RecoveryCenterController extends Controller
      * @param  \App\Models\RecoveryCenter  $recoveryCenter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecoveryCenter $recoveryCenter)
+    public function update(CreateRecoveryCenterRequest $request, $id)
     {
-        //
+        //check if model exists in db
+        $recoveryCenter = RecoveryCenter::findOrFail($id);
+        //update the validated request to model
+        $recoveryCenter->update($request->validated());
+        return response()->json([
+            'message' => 'RecoveryCenter Updated',
+            'RecoveryCenter' => $recoveryCenter
+        ]);
     }
 
     /**
@@ -57,8 +76,13 @@ class RecoveryCenterController extends Controller
      * @param  \App\Models\RecoveryCenter  $recoveryCenter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecoveryCenter $recoveryCenter)
+    public function destroy($id)
     {
         //
+        $recoveryCenter = RecoveryCenter::findOrFail($id);
+        $recoveryCenter->delete();
+        return response()->json([
+            'success' => true,
+        ]);
     }
 }

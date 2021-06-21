@@ -43,7 +43,7 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function getType(Request $id)
+    public function getType($id)
     {
         //find type from DB and return
         $type = Type::findOrFail($id);
