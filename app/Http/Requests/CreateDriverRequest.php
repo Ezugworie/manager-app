@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSiteRequest extends FormRequest
+class CreateDriverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,11 @@ class CreateSiteRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'address' => 'required|string',
-            'location' => 'required|string',
+            'email' => 'required|string|email|unique:drivers',
             'phone' => 'required',
+            'contact_person' => '',
             'status' => 'in:ACTIVE,INACTIVE',
-            'address_id' => 'required|string',
-            'created_by' => 'required|string',
+            'created_by' => 'required',
         ];
     }
 }

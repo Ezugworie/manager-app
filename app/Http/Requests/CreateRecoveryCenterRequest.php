@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSiteRequest extends FormRequest
+class CreateRecoveryCenterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class CreateSiteRequest extends FormRequest
     public function rules()
     {
         return [
+            //
             'name' => 'required|string|max:255',
-            'address' => 'required|string',
-            'location' => 'required|string',
+            'email' => 'required|string|email|unique:recovery_centers',
             'phone' => 'required',
+            'contact_person' => '',
             'status' => 'in:ACTIVE,INACTIVE',
-            'address_id' => 'required|string',
-            'created_by' => 'required|string',
+            'created_by' => 'required',
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSiteRequest extends FormRequest
+class SignInRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,8 @@ class CreateSiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'address' => 'required|string',
-            'location' => 'required|string',
-            'phone' => 'required',
-            'status' => 'in:ACTIVE,INACTIVE',
-            'address_id' => 'required|string',
-            'created_by' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required',
         ];
     }
 }
